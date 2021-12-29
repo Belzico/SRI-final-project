@@ -73,8 +73,8 @@ class Trie:
     
                 
                 
-myTrie=Trie()
-myTrie.insert("wacamole")
-print( myTrie.lookUpAndCount("wacamole"))
-print( myTrie.lookUpAndCount("wacamo"))
-print( myTrie.lookUpAndCount("le"))
+#myTrie=Trie()
+#myTrie.insert("wacamole")
+#print( myTrie.lookUpAndCount("wacamole"))
+#print( myTrie.lookUpAndCount("wacamo"))
+#print( myTrie.lookUpAndCount("le"))

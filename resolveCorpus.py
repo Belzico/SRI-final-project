@@ -1,6 +1,14 @@
 import os
 import myTrie
 import globals
+import re
+
+def fixString(data):
+    print("The original string is : " + data)
+
+    result = re.split(' |,|_|-|\.|\?|\!|;|\+|\*|\:|\[|\]|\^|\$|\(|\)|\{|\}|\=|\||\-|\\n', data)
+# . \ + * ? [ ^ ] $ ( ) { } = !  | : -
+    return result
 
 
 def giveFileList(dir):
@@ -22,11 +30,10 @@ def resolveCorpus():
     for file in fileDic:
         tempTrie=myTrie.Trie()
         line=fileDic[file]
-        removeEndLine=line.split("\n")
-        joinText=" ".join(removeEndLine)
-        words=joinText.split(" ")
+        words= fixString(line)
         for word in words:
-            tempTrie.insert(word)
+            if len(word)>0:
+                tempTrie.insert(word)
         finalDic[file]=tempTrie      
     
     return finalDic    
@@ -35,7 +42,12 @@ finalDic= resolveCorpus()
         
 print("Final!!!!!!!!!!!!!!!!!!!!!!!!!")
 
-text="prueba#2 la vida es bella."
-test=text.split(" ")
 
-print("3")
+
+
+
+
+
+
+
+

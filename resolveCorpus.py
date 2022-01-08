@@ -38,7 +38,7 @@ def resolveCorpus():
     
     return finalDic    
 
-finalDic= resolveCorpus()
+globals.corpusDicc= resolveCorpus()
         
 print("Final!!!!!!!!!!!!!!!!!!!!!!!!!")
 

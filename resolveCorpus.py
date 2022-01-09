@@ -1,14 +1,9 @@
 import os
 import myTrie
 import globals
-import re
+import misc
 
-def fixString(data):
-    print("The original string is : " + data)
 
-    result = re.split(' |,|_|-|\.|\?|\!|;|\+|\*|\:|\[|\]|\^|\$|\(|\)|\{|\}|\=|\||\-|\\n', data)
-# . \ + * ? [ ^ ] $ ( ) { } = !  | : -
-    return result
 
 
 def giveFileList(dir):
@@ -30,7 +25,7 @@ def resolveCorpus():
     for file in fileDic:
         tempTrie=myTrie.Trie()
         line=fileDic[file]
-        words= fixString(line)
+        words= misc.fixString(line)
         for word in words:
             if len(word)>0:
                 tempTrie.insert(word)

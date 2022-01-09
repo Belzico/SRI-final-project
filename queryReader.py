@@ -1,12 +1,16 @@
 
 import myTrie
-import resolveCorpus
+import misc
 import globals
 
 
 def addQwery(qwery):
-    myqwery=resolveCorpus.fixString(qwery)
+    myqwery=misc.fixString(qwery)
     tempTrie=myTrie.Trie()
     for item in myqwery:
         tempTrie.insert(item)
     globals.qweryDicc["qwery"]=tempTrie
+    
+    
+addQwery("la casa de papel")
+print(9)

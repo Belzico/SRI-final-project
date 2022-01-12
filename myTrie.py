@@ -11,9 +11,19 @@ class Node:
     def appendChild(self, child):
         self.childrens[child.letter]=child
 
+    def allWords(self, wordList, currentWord):
+        newWord=currentWord+self.letter
+        if len(self.childrens)==0:
+            wordList.append(newWord)
+            return
+        for item in self.childrens:
+            self.childrens[item].allWords(wordList,newWord)
+            
+            
+    
 class Trie:
     def __init__(self):
-        self.root=Node(None)
+        self.root=Node("")
         self.totalNodes=0
         self.words=0
         self.differentWords=0
@@ -61,17 +71,21 @@ class Trie:
                 node.terminalCount+=1
                 self.words+=1
                 
+    #devuel si aparece,el count de la cadena,cuantas veces es terminal            
     def lookUpAndCount(self,word):
         currentNode=self.root
         for letter in word:
             if letter in currentNode.childrens:
                 currentNode=currentNode.childrens[letter]
             else: 
-                return (False,currentNode.count)
+                return (False,currentNode.count,currentNode.terminalCount)
         
         return(True,currentNode.count,currentNode.terminalCount)    
     
-                
+    def giveAllWords(self):
+        result=[]
+        self.root.allWords(result,"")
+        return result
                 
 #myTrie=Trie()
 #myTrie.insert("wacamole")

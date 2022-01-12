@@ -13,4 +13,7 @@ def addQwery(qwery):
     
     
 addQwery("la casa de papel")
-print(9)
+#print(9)
+#a=globals.qweryDicc["qwery"].giveAllWords()
+#for word in a:
+#    print(a)

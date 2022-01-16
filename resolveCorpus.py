@@ -10,12 +10,18 @@ def giveFileList(dir):
     filesNames = os.listdir(dir)
     fileDic={}
     currentText=""
+    i=0
     for item in filesNames:
         file = open(str(dir)+"/"+item,"r")
+        
+        globals.numberNameDicc[i]=file
+        globals.numberNameDicc[file]=i
+        
         currentText=file.read()
         fileDic[item]=currentText
         file.close()
-    
+
+        i+=1
     return fileDic    
 
 
@@ -34,7 +40,7 @@ def resolveCorpus():
     return finalDic    
 
 globals.corpusDicc= resolveCorpus()
-        
+
 print("Final!!!!!!!!!!!!!!!!!!!!!!!!!")
 
 

@@ -7,5 +7,11 @@ import matrixMaker
 myFiles=[]
 for item in globals.corpusDicc:
     myFiles.append(item)
-tempMatrix=matrixMaker.simpleMatrixCount(myFiles)
+#matrices    
+counts=matrixMaker.simpleMatrixCount(myFiles)
+normalizeFrecuency=matrixMaker.frecuenciaNormalizada(counts)
+logaritms=matrixMaker.logMatrix(counts)
+weitghs=matrixMaker.pesosMatrix(normalizeFrecuency,logaritms)
+
+fileList=matrixMaker.sumWeitghs(weitghs)
 print("a")

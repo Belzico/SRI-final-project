@@ -12,7 +12,7 @@ def addQwery(qwery):
     globals.qweryDicc["qwery"]=tempTrie
     
     
-addQwery("la casa de papel")
+addQwery("luffy bella vida pirata dwan silla")
 #print(9)
 #a=globals.qweryDicc["qwery"].giveAllWords()
 #for word in a:

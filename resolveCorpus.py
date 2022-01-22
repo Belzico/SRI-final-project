@@ -7,11 +7,11 @@ import misc
 
 
 def giveFileList(dir):
-    filesNames = os.listdir(dir)
+    globals.filesNames= os.listdir(dir)
     fileDic={}
     currentText=""
     i=0
-    for item in filesNames:
+    for item in globals.filesNames:
         file = open(str(dir)+"/"+item,"r")
         
         globals.numberNameDicc[i]=file
@@ -39,7 +39,7 @@ def resolveCorpus():
     
     return finalDic    
 
-globals.corpusDicc= resolveCorpus()
+
 
 print("Final!!!!!!!!!!!!!!!!!!!!!!!!!")
 

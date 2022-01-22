@@ -2,16 +2,63 @@ import queryReader
 import globals
 import resolveCorpus
 import matrixMaker
+import visual
+import misc
 
+def fileResolve():
+    myFiles=[]
+    for item in globals.corpusDicc:
+        myFiles.append(item)
+    #matrices
+    tempCount=matrixMaker.simpleMatrixCount(myFiles)    
+    counts=tempCount[0]
+    if not tempCount[1]:
+        visual.sg.popup_error(f'We cant\'t find that!')
 
-myFiles=[]
-for item in globals.corpusDicc:
-    myFiles.append(item)
-#matrices    
-counts=matrixMaker.simpleMatrixCount(myFiles)
-normalizeFrecuency=matrixMaker.frecuenciaNormalizada(counts)
-logaritms=matrixMaker.logMatrix(counts)
-weitghs=matrixMaker.pesosMatrix(normalizeFrecuency,logaritms)
+        return ""
+    normalizeFrecuency=matrixMaker.frecuenciaNormalizada(counts)
+    logaritms=matrixMaker.logMatrix(counts)
+    weitghs=matrixMaker.pesosMatrix(normalizeFrecuency,logaritms)
 
-fileList=matrixMaker.sumWeitghs(weitghs)
-print("a")
+    fileList=matrixMaker.sumWeitghs(weitghs)
+    return fileList
+    #print("a")
+
+window =visual.sg.Window("SRI-Search",visual.layout,size = (1050,400),resizable = True)
+
+def main():
+    while(True):
+        event, values = window.read()
+    
+    #EXITING
+        if event=="Exit" or event == visual.sg.WIN_CLOSED:
+            window.close()
+            break
+    
+        if event =="-FOLDER-":
+            
+            myDir = values["-FOLDER-"]
+        
+            globals.dir=myDir
+            if len(myDir)==0: continue
+            globals.corpusDicc= resolveCorpus.resolveCorpus()
+            
+        
+
+        window["-FILE LIST-"].update(globals.filesNames)
+    
+    #Nor Check Boxes
+        if event =="-ACCEPTQWERY-":
+            if len(globals.corpusDicc)==0: continue
+            
+            globals.qweryString=values["-QWERY-"]
+            
+            if len(globals.qweryString)==0: continue
+            queryReader.addQwery(globals.qweryString)
+            globals.resultSearch= fileResolve()
+            if globals.resultSearch == "": continue
+                
+            fixedStrings=misc.fileToString(globals.resultSearch)
+            window["-RESULT LIST-"].update(fixedStrings)
+        
+main()

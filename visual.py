@@ -5,32 +5,48 @@ import PySimpleGUI as sg
 import os.path
 
 
+sg.theme("DarkGreen6")
+
+qwery=''
+location=''
 #windows 2 columns
+
+
+location= sg.In(size=(25,1), enable_events=True,key="-FOLDER-")
 
 fileListColumn=[
     [
         sg.Text("Corpus Folder"),
-        sg.In(size=(25,1), enable_events=True,key="-FOLDER-"),
+        location,
         sg.FolderBrowse(),
         ],
     [
         sg.Listbox(
-            values=[],enable_events=True,size=(40,20),
-            key="-FILE LIST-"
+            values=[],enable_events=True,size=(45,20),
+            key="-FILE LIST-",
+            expand_x=True,
+            expand_y=True,
+            horizontal_scroll=True
         )
         ],
     ]
 
+
+qwuery=  sg.In(size=(25,1), enable_events=True,key="-QWERY-")
 #solo enseña el nombre del archivo seleccionado
 resultListColumn=[
-   [
+    [
         sg.Text("Qwuery Search"), 
-        sg.In(size=(25,1), enable_events=True,key="-QWERY-"),
+        qwuery, 
+        sg.Button(button_text="Search",enable_events=True,key="-ACCEPTQWERY-")
         ],
     [
         sg.Listbox(
-            values=[],enable_events=True,size=(40,20),
-            key="-RESULT LIST-"
+            values=[],enable_events=True,size=(45,20),
+            key="-RESULT LIST-",
+            expand_x=True,
+            expand_y=True,
+            horizontal_scroll=True
         )
         ],
 ]
@@ -40,34 +56,16 @@ layout = [
     [
         sg.Column(fileListColumn),
         sg.VSeparator(),
-        sg.Column(resultListColumn)
+        sg.Column(resultListColumn),
+        sg.VSeparator(),
+        
     ]
 ]
 
-window =sg.Window("BV-Search",layout)
+#window =sg.Window("BV-Search",layout)
 
 #event loop
-while True:
-    event, values=window.read()
-    if event == "Exit" or event == sg.WIN_CLOSED:
-        break
-    if event=="-FOLDER-":
-        folder =values["-FOLDER-"]
-        try:
-            #get list of the files in folder
-            file_list =os.listdir(folder)
-        except:
-            file_list=[]
-        
-        fnames=[
-            
-            f
-            for f in file_list
-            if os.path.isfile(os.path.join(folder,f))
-            and f.lower().endswith((".png",",gif"))
-            ]
-        window["-FILE LIST-"].update(fnames)
 
     
                 
-window.Close()
+#window.Close()

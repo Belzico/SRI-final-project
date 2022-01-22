@@ -9,4 +9,10 @@ alphaValue=0.4
 
 numberNameDicc={}
 
+qweryString=''
+
 returnCount=10
+
+resultSearch=[]
+
+filesNames=''

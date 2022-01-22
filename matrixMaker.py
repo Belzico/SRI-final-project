@@ -8,6 +8,7 @@ def simpleMatrixCount(fileList,chain=False):
     wordsList=globals.qweryDicc["qwery"].giveAllWords()
     resultList=[]
     currentDicc=None
+    everApear=False
     i=0
     for file in fileList:
         resultList.append([]) 
@@ -19,17 +20,19 @@ def simpleMatrixCount(fileList,chain=False):
             if not chain: 
                 if tup[0]:
                     resultList[i].append(tup[2])
+                    everApear=True
                 else:
                     resultList[i].append(0)
             #caso en que queremos el count de la palabra aun siendo un substring de otra palabra
             else:
                 if tup[0]:
                     resultList[i].append(tup[1])
+                    everApear=True
                 else:
                     resultList[i].append(0)
         i+=1
     
-    return resultList
+    return (resultList,everApear)
 
 def frecuenciaNormalizada(countMatrix):
     currentMax=0
@@ -40,7 +43,10 @@ def frecuenciaNormalizada(countMatrix):
             if countMatrix[row][column]>currentMax:
                 currentMax=countMatrix[row][column]
         for column in range(len(countMatrix[row])):
-            resultMatrix[row].append(countMatrix[row][column]/currentMax)
+            if currentMax==0:
+                resultMatrix[row].append(0)
+            else:
+                resultMatrix[row].append(countMatrix[row][column]/currentMax)
         currentMax=0
     
     return resultMatrix            
@@ -98,12 +104,13 @@ def sumWeitghs(pesos):
     banned={}
     currentImportantPos=0
     for i in range(min([globals.returnCount,len(pesos)])):
+        currentMaxSum=0
         for j in range(len(currentImportantDoc)):
-            if currentImportantDoc[j]>currentMaxSum and j in banned:
+            if currentImportantDoc[j]>currentMaxSum and j not in banned:
                 currentMaxSum=currentImportantDoc[j]
                 currentImportantPos=j
         banned[currentImportantPos]=True
-        resultList.append(globals.numberNameDicc[j])
+        resultList.append(globals.numberNameDicc[currentImportantPos])
         
         
     return resultList

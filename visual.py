@@ -51,6 +51,25 @@ resultListColumn=[
         ],
 ]
 
+textColumn=[
+    [
+        sg.Text("Result Text"), 
+    ],
+    [
+        sg.Multiline(
+            enable_events=True,size=(45,20),
+            key="-QWERY DOCS LIST-",
+            expand_x=True,
+            expand_y=True,
+            default_text='Your text will show up here.',
+            autoscroll=True,
+            disabled=True
+            
+
+        )
+        ]
+]
+
 # full layout
 layout = [
     [
@@ -58,6 +77,7 @@ layout = [
         sg.VSeparator(),
         sg.Column(resultListColumn),
         sg.VSeparator(),
+        sg.Column(textColumn)
         
     ]
 ]

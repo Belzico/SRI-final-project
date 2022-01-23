@@ -24,7 +24,7 @@ def fileResolve():
     return fileList
     #print("a")
 
-window =visual.sg.Window("SRI-Search",visual.layout,size = (1050,400),resizable = True)
+window =visual.sg.Window("SRI-Search",visual.layout,size = (1120,400),resizable = True)
 
 def main():
     while(True):
@@ -32,33 +32,51 @@ def main():
     
     #EXITING
         if event=="Exit" or event == visual.sg.WIN_CLOSED:
-            window.close()
-            break
-    
+            try:
+                window.close()
+                break
+            except:
+                pass
+            
         if event =="-FOLDER-":
-            
-            myDir = values["-FOLDER-"]
-        
-            globals.dir=myDir
-            if len(myDir)==0: continue
-            globals.corpusDicc= resolveCorpus.resolveCorpus()
-            
-        
+            try:
+                myDir = values["-FOLDER-"]
 
-        window["-FILE LIST-"].update(globals.filesNames)
-    
+                globals.dir=myDir
+                if len(myDir)==0: continue
+                globals.corpusDicc= resolveCorpus.resolveCorpus()
+
+
+                window["-FILE LIST-"].update(globals.filesNames)
+            except:
+                pass
+
+        
+        if event=="-RESULT LIST-":
+            try:
+                myDir=values["-RESULT LIST-"][0]
+                currentFile=open(myDir,"r")
+                
+                window["-QWERY DOCS LIST-"].update(currentFile.read())
+
+                currentFile.close()
+            except:
+                pass
+            
     #Nor Check Boxes
         if event =="-ACCEPTQWERY-":
-            if len(globals.corpusDicc)==0: continue
-            
-            globals.qweryString=values["-QWERY-"]
-            
-            if len(globals.qweryString)==0: continue
-            queryReader.addQwery(globals.qweryString)
-            globals.resultSearch= fileResolve()
-            if globals.resultSearch == "": continue
-                
-            fixedStrings=misc.fileToString(globals.resultSearch)
-            window["-RESULT LIST-"].update(fixedStrings)
-        
+            try:
+                if len(globals.corpusDicc)==0: continue
+
+                globals.qweryString=values["-QWERY-"]
+
+                if len(globals.qweryString)==0: continue
+                queryReader.addQwery(globals.qweryString)
+                globals.resultSearch= fileResolve()
+                if globals.resultSearch == "": continue
+
+                fixedStrings=misc.fileToString(globals.resultSearch)
+                window["-RESULT LIST-"].update(fixedStrings)
+            except:
+                pass
 main()

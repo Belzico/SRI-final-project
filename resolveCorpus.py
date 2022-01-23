@@ -33,7 +33,10 @@ def resolveCorpus():
         line=fileDic[file]
         words= misc.fixString(line)
         for word in words:
+            
             if len(word)>0:
+                if word.lower() in globals.pronounsAndOthers:
+                    if not globals.useBanned: continue
                 tempTrie.insert(word)
         finalDic[file]=tempTrie      
     

@@ -42,7 +42,10 @@ def main():
             try:
                 myDir = values["-FOLDER-"]
 
+                misc.pronounDeletion()
+
                 globals.dir=myDir
+                
                 if len(myDir)==0: continue
                 globals.corpusDicc= resolveCorpus.resolveCorpus()
 

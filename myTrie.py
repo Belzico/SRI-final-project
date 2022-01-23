@@ -36,14 +36,15 @@ class Trie:
         
         
     def insert(self, word):
-    	
+
+        lower_word=word.lower()
 		#Empezamos desde la raíz. 
         node=self.root
         prefix=[]
 
         lenCount=0
         
-        for letter in word:
+        for letter in lower_word:
 			
             lenCount+=1
             next_node=self.getNextSon(node, letter)

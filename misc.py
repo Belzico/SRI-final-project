@@ -1,5 +1,5 @@
 import re
-
+import myTrie
 
 def fixString(data):
     print("The original string is : " + data)
@@ -14,3 +14,9 @@ def fileToString(fileList):
     for item in fileList:
         result.append(item.name)
     return result
+
+def pronounDeletion():
+    tempTrie=myTrie.Trie()
+    for item in globals.bannedWords:
+        tempTrie.insert(item)
+    globals.pronounsAndOthers=tempTrie

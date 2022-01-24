@@ -1,8 +1,9 @@
 import re
 import myTrie
+import globals
 
 def fixString(data):
-    print("The original string is : " + data)
+    #print("The original string is : " + data)
 
     result = re.split(' |,|_|-|\.|\?|\!|;|\+|\*|\:|\[|\]|\^|\$|\(|\)|\{|\}|\=|\||\-|\\n', data)
 # . \ + * ? [ ^ ] $ ( ) { } = !  | : -

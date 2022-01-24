@@ -11,8 +11,30 @@ def addQwery(qwery):
         tempTrie.insert(item)
     globals.qweryDicc["qwery"]=tempTrie
     
+    addSugestion()
     
-addQwery(globals.qweryString)
+def addSugestion():
+    globals.sugestionDicc={}
+    for word in misc.fixString(globals.qweryString): 
+        if word=="": continue
+        globals.sugestionDicc[word]=None
+        
+def stringSugestionMaker():
+    result="Las siguientes palabras no se encontraron pruebe cambiarlas por alguna similar o una de las sugeridas: "
+    for key in globals.sugestionDicc:
+        if not key==globals.sugestionDicc[key]:
+            if globals.sugestionDicc[key]==None:
+                result+=" word: "+key+"=>(no-sugestion) "
+            else:
+                result+=" word: "+key+"=>"+globals.sugestionDicc[key]+" "
+    
+    result+="."
+    return result 
+
+
+
+
+#addQwery(globals.qweryString)
 #print(9)
 #a=globals.qweryDicc["qwery"].giveAllWords()
 #for word in a:

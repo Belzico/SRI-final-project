@@ -35,9 +35,12 @@ def resolveCorpus():
         for word in words:
             
             if len(word)>0:
-                if word.lower() in globals.pronounsAndOthers:
-                    if not globals.useBanned: continue
-                tempTrie.insert(word)
+                isPronoun=globals.pronounsAndOthers.lookUpAndCount(word.lower())
+                if isPronoun[0]:
+                    if not globals.useBanned:
+                        continue
+                        
+                tempTrie.insert(word.lower())
         finalDic[file]=tempTrie      
     
     return finalDic    

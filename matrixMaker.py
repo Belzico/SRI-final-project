@@ -102,17 +102,24 @@ def sumWeitghs(pesos):
     #aca esto se debe separar en otro metodo para cuando se tomen otros criterios a la hora de devolver los mas importantes
     resultList=[]
     banned={}
+    tempCount=0
     currentImportantPos=0
+    weChange=False
     for i in range(min([globals.returnCount,len(pesos)])):
         currentMaxSum=0
         for j in range(len(currentImportantDoc)):
-            if currentImportantDoc[j]>currentMaxSum and j not in banned:
+            if currentImportantDoc[j]>currentMaxSum and j not in banned and currentImportantDoc[j]>0.1:
                 currentMaxSum=currentImportantDoc[j]
                 currentImportantPos=j
-        banned[currentImportantPos]=True
-        resultList.append(globals.numberNameDicc[currentImportantPos])
-        
-        
+                weChange=True
+        if weChange:
+            banned[currentImportantPos]=True
+            resultList.append(globals.numberNameDicc[currentImportantPos])
+            currentImportantPos=0
+            weChange=False
+            tempCount+=1
+            
+    print(tempCount)    
     return resultList
 
             

@@ -4,6 +4,16 @@ import resolveCorpus
 import matrixMaker
 import visual
 import misc
+import time
+import miniCrwaler
+import threading
+
+def concurrencyResolve():
+    while True:
+        if globals.firstFolderAccess:
+            miniCrwaler.newDocSearch()
+            #visual.sg.popup_error(f'Im searching!')
+        time.sleep(200)
 
 def fileResolve():
     myFiles=[]
@@ -39,20 +49,18 @@ def main():
                 pass
             
         if event =="-FOLDER-":
-            try:
-                myDir = values["-FOLDER-"]
-
-                misc.pronounDeletion()
-
-                globals.dir=myDir
-                
-                if len(myDir)==0: continue
-                globals.corpusDicc= resolveCorpus.resolveCorpus()
-
-
-                window["-FILE LIST-"].update(globals.filesNames)
-            except:
-                pass
+            
+            #try
+            visual.sg.popup_error(f"Please wait a bit")
+            myDir = values["-FOLDER-"]
+            misc.pronounDeletion()
+            globals.dir=myDir
+            
+            if len(myDir)==0: continue
+            globals.corpusDicc= resolveCorpus.resolveCorpus()
+            window["-FILE LIST-"].update(globals.filesNames)
+            #except:
+                #pass
 
         
         if event=="-RESULT LIST-":
@@ -68,18 +76,28 @@ def main():
             
     #Nor Check Boxes
         if event =="-ACCEPTQWERY-":
-            try:
-                if len(globals.corpusDicc)==0: continue
+            visual.sg.popup_error(f"Please wait a bit")
+            #try:
+            if len(globals.corpusDicc)==0: continue
 
-                globals.qweryString=values["-QWERY-"]
+            globals.qweryString=values["-QWERY-"]
 
-                if len(globals.qweryString)==0: continue
-                queryReader.addQwery(globals.qweryString)
-                globals.resultSearch= fileResolve()
-                if globals.resultSearch == "": continue
+            if len(globals.qweryString)==0: continue
+            queryReader.addQwery(globals.qweryString)
+            globals.resultSearch= fileResolve()
+            if globals.resultSearch == "": continue
 
-                fixedStrings=misc.fileToString(globals.resultSearch)
-                window["-RESULT LIST-"].update(fixedStrings)
-            except:
-                pass
+            fixedStrings=misc.fileToString(globals.resultSearch)
+            window["-RESULT LIST-"].update(fixedStrings)
+                
+            globals.firstFolderAccess=True
+                
+            textSuggestion= queryReader.stringSugestionMaker()
+            visual.sg.popup_error(textSuggestion)
+            #except:
+            #    pass
+
+
+hilo1=threading.Thread(target=concurrencyResolve)
+hilo1.start()
 main()

@@ -1,4 +1,4 @@
-
+import globals
 
 
 class Node:
@@ -74,11 +74,15 @@ class Trie:
                 
     #devuel si aparece,el count de la cadena,cuantas veces es terminal            
     def lookUpAndCount(self,word):
+        myWord=''
         currentNode=self.root
         for letter in word:
             if letter in currentNode.childrens:
                 currentNode=currentNode.childrens[letter]
+                myWord+=letter
             else: 
+                
+                globals.insertSuggestion(word,refillPrefix(currentNode,myWord))
                 return (False,currentNode.count,currentNode.terminalCount)
         
         return(True,currentNode.count,currentNode.terminalCount)    
@@ -87,7 +91,19 @@ class Trie:
         result=[]
         self.root.allWords(result,"")
         return result
-                
+
+def refillPrefix(node,chain):
+    currentNode=node
+    resultChain=chain
+    while len(currentNode.childrens)>0:
+        for letter in currentNode.childrens:
+            resultChain+=letter
+            currentNode=currentNode.childrens[letter]
+            break
+        if currentNode.terminalCount>0:
+            return resultChain
+    return resultChain    
+    
 #myTrie=Trie()
 #myTrie.insert("wacamole")
 #print( myTrie.lookUpAndCount("wacamole"))

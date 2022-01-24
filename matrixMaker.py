@@ -85,6 +85,8 @@ def pesosMatrix(fNmatrix,logMatrix):
             resultMatrix[row].append((a+(1-a)*fNmatrix[row][column])*logMatrix[2][column])
     return resultMatrix
 
+def pesosQweryCalculator()
+    pass
 
 def sumWeitghs(pesos):
     

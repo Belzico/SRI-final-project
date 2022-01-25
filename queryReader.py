@@ -29,7 +29,7 @@ def stringSugestionMaker():
     for key in globals.sugestionDicc:
         if not key==globals.sugestionDicc[key]:
             if globals.sugestionDicc[key]==None:
-                result+=" word: "+key+"=>(no-sugestion) "
+                pass
             else:
                 result+=" word: "+key+"=>"+globals.sugestionDicc[key]+" "
     

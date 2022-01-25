@@ -32,9 +32,9 @@ def fileResolve():
         return ""
     normalizeFrecuency=matrixMaker.frecuenciaNormalizada(counts)
     
-    countBorrarList=matrixMaker.countOcurrency(counts)
+    #countBorrarList=matrixMaker.countOcurrency(counts)
     #borrar
-    tempListCountNi=matrixMaker.wordInDocsList(wordsUse)
+    #tempListCountNi=matrixMaker.wordInDocsList(wordsUse)
     
     logaritms=matrixMaker.logMatrix(counts)
     weitghs=matrixMaker.pesosMatrix(normalizeFrecuency,logaritms)

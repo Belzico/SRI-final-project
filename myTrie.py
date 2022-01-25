@@ -84,7 +84,8 @@ class Trie:
                 
                 globals.insertSuggestion(word,refillPrefix(currentNode,myWord))
                 return (False,currentNode.count,currentNode.terminalCount)
-        
+            
+        globals.insertSuggestion(word,word)
         return(True,currentNode.count,currentNode.terminalCount)    
     
     def giveAllWords(self):

@@ -28,10 +28,12 @@ bannedWords=["el","la","los","las","Un","uno","unos","una","unas","lo","al","yo"
 holgura=0.4
 
 def setHolgura(value):
-    if float(value)>=0.0:
+    if float(value)<=0.0:
         holgura=0.1
-    if float(value)>0.1:
+    elif float(value)>0.9:
         holgura=0.9
+    else:
+        holgura=value
 
 useBanned=False
 

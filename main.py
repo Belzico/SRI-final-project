@@ -1,3 +1,4 @@
+from glob import glob
 import queryReader
 import globals
 import resolveCorpus
@@ -26,7 +27,7 @@ def fileResolve():
     wordsUse=tempCount[2]  
     counts=tempCount[0]
     if not tempCount[1]:
-        visual.sg.popup_error(f'We cant\'t find that!')
+        visual.sg.Popup('We cant\'t find that!')
 
         return ""
     normalizeFrecuency=matrixMaker.frecuenciaNormalizada(counts)
@@ -62,17 +63,24 @@ def main():
             
         if event =="-FOLDER-":
             
-            #try
-            visual.sg.popup_error(f"Please wait a bit")
-            myDir = values["-FOLDER-"]
-            misc.pronounDeletion()
-            globals.dir=myDir
+            try:
+                try:
+                    holgura = float(values["-HOLGURA INPUT-"])
+                    globals.setHolgura(holgura)
+                except:
+                    pass
+                
+                visual.sg.Popup("Please wait a bit")
+                #visual.sg.popup_error(f"Please wait a bit")
+                myDir = values["-FOLDER-"]
+                misc.pronounDeletion()
+                globals.dir=myDir
             
-            if len(myDir)==0: continue
-            globals.corpusDicc= resolveCorpus.resolveCorpus()
-            window["-FILE LIST-"].update(globals.filesNames)
-            #except:
-                #pass
+                if len(myDir)==0: continue
+                globals.corpusDicc= resolveCorpus.resolveCorpus()
+                window["-FILE LIST-"].update(globals.filesNames)
+            except:
+                pass
 
         
         if event=="-RESULT LIST-":
@@ -88,7 +96,7 @@ def main():
             
     #Nor Check Boxes
         if event =="-ACCEPTQWERY-":
-            visual.sg.popup_error(f"Please wait a bit")
+            visual.sg.Popup(f"Please wait a bit")
             #try:
             if len(globals.corpusDicc)==0: continue
 
@@ -105,7 +113,7 @@ def main():
             globals.firstFolderAccess=True
                 
             textSuggestion= queryReader.stringSugestionMaker()
-            visual.sg.popup_error(textSuggestion)
+            visual.sg.Popup(textSuggestion)
             #except:
             #    pass
 

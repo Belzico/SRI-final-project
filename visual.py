@@ -11,11 +11,20 @@ qwery=''
 location=''
 #windows 2 columns
 
+HolguraCheckbox = sg.Checkbox( enable_events = True,key =  "-HOLGURACHECK-",text = "Is valid",  default = False ,  disabled=False)
 
 location= sg.In(size=(25,1), enable_events=True,key="-FOLDER-")
 
 fileListColumn=[
+    
     [
+    sg.Text("Holgura:",justification="right", )  ,
+    sg.In(size=(4,1),enable_events=True, key="-HOLGURA INPUT-",),
+    HolguraCheckbox,
+    sg.Text(" (Default: 0.4 )",justification="right", )  ,
+    ],
+    [
+        
         sg.Text("Corpus Folder"),
         location,
         sg.FolderBrowse(),
@@ -51,6 +60,8 @@ resultListColumn=[
         ],
 ]
 
+
+
 textColumn=[
     [
         sg.Text("Result Text"), 
@@ -72,7 +83,7 @@ textColumn=[
 
 # full layout
 layout = [
-    [
+    [   
         sg.Column(fileListColumn),
         sg.VSeparator(),
         sg.Column(resultListColumn),

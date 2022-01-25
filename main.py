@@ -113,7 +113,8 @@ def main():
             globals.firstFolderAccess=True
                 
             textSuggestion= queryReader.stringSugestionMaker()
-            visual.sg.Popup(textSuggestion)
+            if len(textSuggestion)>104:
+                visual.sg.Popup(textSuggestion)
             #except:
             #    pass
 

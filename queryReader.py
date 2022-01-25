@@ -34,6 +34,7 @@ def stringSugestionMaker():
                 result+=" word: "+key+"=>"+globals.sugestionDicc[key]+" "
     
     result+="."
+    print(str(len(result))+"aaaaaaaaaaa")
     return result 
 
 

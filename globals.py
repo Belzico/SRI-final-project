@@ -44,8 +44,8 @@ concurrencyCorpus={}
 firstFolderAccess=False
 
 def insertSuggestion(word, sugestion):
-    if sugestion==word:
-        print("aaaaaaa")
+    #if sugestion==word:
+    #    print("aaaaaaa")
     if not word in sugestionDicc:
         return
     if sugestionDicc[word]==None:
@@ -61,7 +61,7 @@ def wordRank(word, currentSugestion, posibleSugestion):
         return posibleSugestion
     temp1=0
     temp2=0
-    for i in range(len(word)):
+    for i in range(min(min(len(word),len(currentSugestion)),len(posibleSugestion)) ):
         if currentSugestion[i]==word[i]:
             temp1+=1
         if posibleSugestion[i]==word[i]:
@@ -70,4 +70,8 @@ def wordRank(word, currentSugestion, posibleSugestion):
             return posibleSugestion
         elif temp1>temp2:
             return currentSugestion
-    return currentSugestion
+    
+    if(abs(len(currentSugestion)-len(word)) <=abs(len(posibleSugestion)-len(word)) ):
+        return currentSugestion
+    else:
+        return posibleSugestion

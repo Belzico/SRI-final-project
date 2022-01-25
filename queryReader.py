@@ -8,7 +8,12 @@ def addQwery(qwery):
     myqwery=misc.fixString(qwery)
     tempTrie=myTrie.Trie()
     for item in myqwery:
-        tempTrie.insert(item)
+        isPronoun=globals.pronounsAndOthers.lookUpAndCount(item.lower())
+        if isPronoun[0]:
+            if not globals.useBanned:
+                print("la palabra "+ item+" no importa")
+                continue
+        tempTrie.insert(item.lower())
     globals.qweryDicc["qwery"]=tempTrie
     
     addSugestion()

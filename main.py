@@ -16,21 +16,33 @@ def concurrencyResolve():
         time.sleep(200)
 
 def fileResolve():
+    
+    temp=globals.qweryString
     myFiles=[]
     for item in globals.corpusDicc:
         myFiles.append(item)
     #matrices
-    tempCount=matrixMaker.simpleMatrixCount(myFiles)    
+    tempCount=matrixMaker.simpleMatrixCount(myFiles)  
+    wordsUse=tempCount[2]  
     counts=tempCount[0]
     if not tempCount[1]:
         visual.sg.popup_error(f'We cant\'t find that!')
 
         return ""
     normalizeFrecuency=matrixMaker.frecuenciaNormalizada(counts)
+    
+    countBorrarList=matrixMaker.countOcurrency(counts)
+    #borrar
+    tempListCountNi=matrixMaker.wordInDocsList(wordsUse)
+    
     logaritms=matrixMaker.logMatrix(counts)
     weitghs=matrixMaker.pesosMatrix(normalizeFrecuency,logaritms)
+    
+    qweryNormFre=matrixMaker.fNmatrixQweryBuilder()
+    
+    pesosQwery=matrixMaker.pesosQweryCalculator(logaritms,qweryNormFre)
 
-    fileList=matrixMaker.sumWeitghs(weitghs)
+    fileList=matrixMaker.sumWeitghs(weitghs,pesosQwery)
     return fileList
     #print("a")
 

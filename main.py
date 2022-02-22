@@ -101,7 +101,9 @@ def main():
             if len(globals.corpusDicc)==0: continue
 
             globals.qweryString=values["-QWERY-"]
-
+            
+            globals.qweryDicc={}
+            
             if len(globals.qweryString)==0: continue
             queryReader.addQwery(globals.qweryString)
             globals.resultSearch= fileResolve()

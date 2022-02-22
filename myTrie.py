@@ -22,11 +22,12 @@ class Node:
             
     
 class Trie:
-    def __init__(self):
+    def __init__(self,name):
         self.root=Node("")
         self.totalNodes=0
         self.words=0
         self.differentWords=0
+        self.name=name
             
     def getNextSon(self, parentNode, key):
         if key in parentNode.childrens:
@@ -81,11 +82,17 @@ class Trie:
                 currentNode=currentNode.childrens[letter]
                 myWord+=letter
             else: 
-                
-                globals.insertSuggestion(word,refillPrefix(currentNode,myWord))
+                try:
+                    if self.name=="corpus":
+                        globals.insertSuggestion(word,refillPrefix(currentNode,myWord))
+                except:
+                    pass
                 return (False,currentNode.count,currentNode.terminalCount)
-            
-        globals.insertSuggestion(word,word)
+        try:
+            if self.name=="corpus":
+                globals.insertSuggestion(word,word)
+        except:
+            pass
         return(True,currentNode.count,currentNode.terminalCount)    
     
     def giveAllWords(self):

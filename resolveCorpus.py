@@ -29,7 +29,7 @@ def resolveCorpus():
     finalDic={}
     fileDic=giveFileList(globals.dir)
     for file in fileDic:
-        tempTrie=myTrie.Trie()
+        tempTrie=myTrie.Trie("corpus")
         line=fileDic[file]
         words= misc.fixString(line)
         for word in words:

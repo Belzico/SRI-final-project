@@ -17,7 +17,7 @@ def fileToString(fileList):
     return result
 
 def pronounDeletion():
-    tempTrie=myTrie.Trie()
+    tempTrie=myTrie.Trie("pronoun")
     for item in globals.bannedWords:
         tempTrie.insert(item)
     globals.pronounsAndOthers=tempTrie

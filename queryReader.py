@@ -6,7 +6,7 @@ import globals
 
 def addQwery(qwery):
     myqwery=misc.fixString(qwery)
-    tempTrie=myTrie.Trie()
+    tempTrie=myTrie.Trie("qwery")
     for item in myqwery:
         isPronoun=globals.pronounsAndOthers.lookUpAndCount(item.lower())
         if isPronoun[0]:

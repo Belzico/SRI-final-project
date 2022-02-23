@@ -10,17 +10,18 @@ import misc
 import re
 from myTrie import Trie
 
+direccionrel = "./adi/ADIREL"
 
 def MetricEvaluation(cases, ListResult, ListEsperados, rank):
     total_cases = len(cases)
     arc_R = len(ListResult)
     arc_Esp = len(ListEsperados)
     
-    T_esperados = Trie()
+    T_esperados = Trie("")
     for arch in ListEsperados:
         T_esperados.insert(arch)
     
-    T_cases = Trie()
+    T_cases = Trie("")
     for arch in cases:
         T_cases.insert(arch)
     
@@ -97,7 +98,7 @@ def MetricEvaluation(cases, ListResult, ListEsperados, rank):
     return result_metric
 
 def consult(qwery, cases):
-    arch = open("./adi/ADIREL",'r')
+    arch = open(direccionrel,'r')
     text = arch.read()
     doc = str.split(text,"\n")
     arch.close()
@@ -376,4 +377,8 @@ def ConstrDocs(dir):
    
 #l = ConstrDocs("./adi/ADI.ALL")
 #WriteDocument(l,"./adi/adicases")
+direccionrel = "./adi/ADIREL"
 RevResult("./adi/adicases", "./adi/ADI.QRY")
+
+direccionrel = "./desechable/cranqrel.txt"
+RevResult("./testCases", "./cranqwery/cran.QRY")
